@@ -35,8 +35,8 @@ x2 = b - r*(b - a)
 f1 = equation(x1)
 f2 = equation(x2)
 print"\n"
-print "iteration \t a \t\t b"
-print 1,"\t",a,"\t\t",b
+print "iteration \t a \t b"
+print iter,"\t %0.5f"% a,"\t %0.5f"% b
 
 while(math.fabs(b - a)>(e/100.)):
     
@@ -50,14 +50,14 @@ while(math.fabs(b - a)>(e/100.)):
         x1 = a + r*(b - a)
         f2 = f1
         f1 = equation(x1)
-        print iter,"\t",a,"\t",b
+        print iter,"\t %0.5f"% a,"\t %0.5f"% b
     else:
         a = x1
         x1 = x2
         x2 = b - r*(b - a)
         f1 = f2
         f2 = equation(x2)
-        print iter,"\t",a,"\t",b
+        print iter,"\t %0.5f"% a,"\t %0.5f"% b
         
 """store the minima value in xstar"""
 if (f1 <= f2):
@@ -75,6 +75,7 @@ print "\n"
 print "Minimum value is at x = ", xstar,"\n", "Function value at x is y = ",equation(xstar)
 print "Number of iterations = ",iter
 plot(x, val)
+scatter(xstar, equation(xstar))
 xlabel("x")
 ylabel("f(x)")
 grid()
