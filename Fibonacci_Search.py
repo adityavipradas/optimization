@@ -93,6 +93,7 @@ print "\n"
 print "Minimum value is at x = ", xstar,"\n", "Function value at x is y = ",equation(xstar)
 plot(x, val)
 scatter(xstar, equation(xstar))
+title('Local minima in a function')
 xlabel("x")
 ylabel("f(x)")
 grid()
