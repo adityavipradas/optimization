@@ -38,7 +38,7 @@ term1 = 1
 F.append(term1)
 f = term0 + term1
 F.append(f)
-while (f < (1/e)):
+while (f < (1/(e/100.))):
     term0 = term1
     term1 = f
     f = term0 + term1
@@ -58,8 +58,8 @@ x2 = b - (F[N-2]/F[N])*L[0]
 f1 = equation(x1)
 f2 = equation(x2)
 print"\n"
-print "iteration \t a \t\t b"
-print 1,"\t",a,"\t\t",b
+print "iteration \t a \t b"
+print 1,"\t %0.5f"% a,"\t %0.5f"% b
 for i in range(2,N):
     L.append((F[N-(i-1)]/F[N])*L[0])
     if (f1 <= f2):
@@ -68,14 +68,14 @@ for i in range(2,N):
         x1 = a + ((F[N-(i+1)]/F[N-(i-1)])*L[i-1])
         f2 = f1
         f1 = equation(x1)
-        print i,"\t",a,"\t",b
+        print i,"\t %0.5f"% a,"\t %0.5f"% b
     else:
         a = x1
         x1 = x2
         x2 = b - ((F[N-(i+1)]/F[N-(i-1)])*L[i-1])       
         f1 = f2
         f2 = equation(x2)
-        print i,"\t",a,"\t",b
+        print i,"\t %0.5f"% a,"\t %0.5f"% b
 
 """store the minima value in xstar"""
 if (f1 <= f2):
@@ -92,7 +92,9 @@ for i in frange(ak, bk, 0.01):
 print "\n"
 print "Minimum value is at x = ", xstar,"\n", "Function value at x is y = ",equation(xstar)
 plot(x, val)
+scatter(xstar, equation(xstar))
 xlabel("x")
 ylabel("f(x)")
 grid()
 show()
+
