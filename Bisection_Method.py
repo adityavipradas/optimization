@@ -60,6 +60,7 @@ for i in frange(ak, bk, 0.01):
 print "Minimum value is at x = ", xstar,"\n", "Function value is y = ",equation(xstar)
 print "Number of iterations = ",iter
 plot(x, val)
+scatter(xstar, equation(xstar))
 xlabel("x")
 ylabel("f(x)")
 grid()
