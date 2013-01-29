@@ -90,8 +90,13 @@ print "Minimum value is at x = ", x,"\n", "Function value at x is y = ",equation
 print "Number of iterations = ",iter
 plot(xstar, val1)
 plot(xstar, val2, '--')
+scatter(x, equation(x))
+tab1 = "Objective Function f(x)"
+tab2 = "Quadratic Interpolation(Lagrange)"
+legend((tab1, tab2), loc = 0)
+title('Local minima in a function')
 xlabel("x")
 ylabel("f(x)")
-scatter(x, equation(x))
 grid()
 show()
+
