@@ -32,8 +32,8 @@ while (math.fabs(b - a)>(e/100.)):
     iter = iter + 1
 
     """calculate the values of new points x1 and x2"""
-    x1 = ((a + b)/2.) - 0.000000372
-    x2 = ((a + b)/2.) + 0.000000372
+    x1 = ((a + b)/2.) - ((b - a)/4)
+    x2 = ((a + b)/2.) + ((b - a)/4)
 
     """evaluate the values of function at x1 and x2"""
     f1 = equation(x1)
