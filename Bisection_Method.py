@@ -61,6 +61,7 @@ print "Minimum value is at x = ", xstar,"\n", "Function value is y = ",equation(
 print "Number of iterations = ",iter
 plot(x, val)
 scatter(xstar, equation(xstar))
+title('Local minima in a function')
 xlabel("x")
 ylabel("f(x)")
 grid()
