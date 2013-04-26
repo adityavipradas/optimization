@@ -1,3 +1,4 @@
+from __future__ import division
 # -*- coding: utf-8 -*-
 """
 Created on Fri Apr 12 22:23:32 2013
@@ -16,12 +17,19 @@ def function(var):
     y = var[0] - var[1] + 2 * var[0]**2 + 2 * var[0] * var[1] + var[1]**2
     return y
     
-def gradient(y, slope, guess, e):
+def gradient(y, slope, guess, e, iter, prev_val):
+    iter = iter + 1
     #slope_val holds values of slope at guess value
     slope_val = slope.subs(x1, guess[0]).subs(x2, guess[1])
     print "\n"
-    print slope_val
+    if iter > 1:
+        #iteration 2 onwards consists of new direction search
+        #find new direction dependent on previous direction
+        slope_val = (-1 * slope_val) + ((slope_val.transpose() * slope_val)[0] / \
+        (prev_val.transpose() * prev_val)[0]) * (-1 * prev_val)
+        slope_val = -1 * slope_val
     #xiter and yiter hold x and y coordinates of guess for plotting
+    print slope_val 
     xiter.append(guess[0])
     yiter.append(guess[1])
     #prev holds guess for comparison
@@ -40,9 +48,11 @@ def gradient(y, slope, guess, e):
     print guess
     print "\n"
     #check condition and proceed
-    if math.fabs(prev[0] - guess[0]) > e or math.fabs(prev[1] - guess[1]) > e:         
-        gradient(y, slope, guess, e)
-    return guess, xiter, yiter
+    if math.fabs(prev[0] - guess[0]) > e or math.fabs(prev[1] - guess[1]) > e:
+        #store current slope value (slope_val) in prev_val
+        gradient(y, slope, guess, e, iter, slope_val)
+    res = guess
+    return xiter, yiter
 
 #define symbols globally
 x1 = sy.Symbol('x1')
@@ -56,13 +66,13 @@ xiter, yiter = [], []
 y = function([x1, x2])
 print y
 #slope holds slope of y
-slope = sy.Matrix([[y.diff(x1)], [y.diff(x2)]])
+slope = sy.Matrix([y.diff(x1), y.diff(x2)])
 print slope
 #y and slope do not change throughout code execution 
 
 #guess holds minimum value
 #gradient(function, slope, initial guess, interval spacing)
-guess, xiter, yiter = gradient(y, slope, [1, 1], 0.001)
+xiter, yiter = gradient(y, slope, [1, 1], 0.001, 0, slope)
 
 #plot result
 plt.grid()
@@ -70,7 +80,7 @@ plt.plot(xiter, yiter)
 plt.plot(xiter[-1], yiter[-1],'-o')
 plt.legend(["path", "minima"], loc = "best")
 plt.annotate((round(xiter[-1], 3), round(yiter[-1], 3)), (xiter[-1], yiter[-1]))
-plt.title("steepest descent method")
+plt.title("conjugate gradient method")
 plt.xlabel("x1")
 plt.ylabel("x2")
 plt.show()

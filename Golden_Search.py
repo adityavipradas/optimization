@@ -15,7 +15,7 @@ from pylab import*
 """define function"""
 """change the function as per requirement"""
 def equation(x):
-    y = (2*math.sin(x))-((x**2)/10.)
+    y = 2*(-5*x + 1)**2 + (-5*x + 1)*(-3*x + 1) + (-3*x + 1)**2
     return y
     
 """accept inputs"""  
@@ -68,7 +68,7 @@ else:
 """plot"""    
 x = []
 val = []
-for i in frange(ak, bk, 0.01):
+for i in frange(ak, bk, 0.1):
     x.append(i)
     val.append(equation(i))
 print "\n"
